@@ -4,8 +4,8 @@ baremetal:
 
 cookbooks:       
   hopsworks:                                                                     
-    github: "hopshadoop/hopsworks-chef"
-    branch: "master"  
+    github: "AlexHopsworks/hopsworks-chef"
+    branch: "aegis"  
 
 attrs:
   install:
@@ -19,6 +19,8 @@ attrs:
     war_url: http://snurran.sics.se/hops/hopsworks/0.1.0/hopsworks.war
     ca_url: http://snurran.sics.se/hops/hopsworks/0.1.0/hopsworks-ca.war
     port: 8080
+  hopssite:
+    manual_register: true
 groups: 
   namenodes:
     size: 1 

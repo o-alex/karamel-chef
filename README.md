@@ -126,6 +126,7 @@ cd karamel-0.4
 9. After running karamel it will automatically load in firefox under `localhost:9090/index.html`
 
 10. Within karamel go to `Menu` - `Load Cluster Defn` and load the `1.hopsworks.yml` cluster definition, after which `Launch` the cluster.
+
 Note: remember to change the install/baremetal user from vagrant to osboxes in this case.
 
 11. Launch and check the status until all recipies are installed (status - done).

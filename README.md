@@ -104,26 +104,30 @@ sudo apt-get install jre-default
 ```
 sudo apt-get install git
 ```
-6. Get karamel-chef and change the install user in the cluster definition: `1.hopsworks.yml`
+6. Get karamel-chef and change the install user in the cluster definition
 ```
 git clone https://github.com/o-alex/karamel-chef 
 ```
-Change the install/baremetal users to your user (osboxes) in the cluster definition:
+Change the install/baremetal users to your user (osboxes) in the cluster definition: `karamel-chef/cluster-defns/1.hopsworks.yml`
 
 https://github.com/o-alex/karamel-chef/blame/master/cluster-defns/1.hopsworks.yml#L3
 
 https://github.com/o-alex/karamel-chef/blame/master/cluster-defns/1.hopsworks.yml#L13
 
 7. Get karamel (http://karamel.io) version 0.4:
+
 http://www.karamel.io/sites/default/files/downloads/karamel-0.4.tgz
+
 8. Run karamel:
 ```
 cd karamel-0.4
 ./bin/karamel
 ```
 9. After running karamel it will automatically load in firefox under `localhost:9090/index.html`
+
 10. Within karamel go to `Menu` - `Load Cluster Defn` and load the `1.hopsworks.yml` cluster definition, after which `Launch` the cluster.
 Note: remember to change the install/baremetal user from vagrant to osboxes in this case.
+
 11. Launch and check the status until all recipies are installed (status - done).
-11. Launch and check the status until all recipies are installed (status - done).
+
 12. Access hops at the `localhost:8080/hopsworks`

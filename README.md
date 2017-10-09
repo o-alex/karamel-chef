@@ -87,6 +87,7 @@ chmod 600 authorized_keys
 sudo apt-get install openssh-server
 ```
 Note: Make sure you can ssh into the machine with the install user (osboxes) into the 10.0.2.15.
+
 3. Modify in the /etc/hosts file this line:
 ```
 127.0.1.1   osboxes

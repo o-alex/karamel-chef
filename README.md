@@ -59,52 +59,68 @@ Note: The VM requires a bit of time to load everything - otherwise the apt-get i
 ```
 sudo visudo
 ```
-and set NOPASSWD for sudo
-
-2. We require the installation script to be able to ssh into the installed machine - since this is a baremetal installation, we require the machine to be able to ssh into itself
-
-2.1 generate ssh keys
-
-2.2 authorise your key to ssh into this machine
-
-2.3 make sure that both the .ssh folder and the authorized_keys files have the right access rights
-
-2.4 install openssh-server and make sure you can ssh into the machine with the install user (osboxes) into the 10.0.2.15.
-
-3. Replace in /etc/hosts from 127.0.1.1 to 10.0.2.15
-
+and change the sudo line from:
+```
+%sudo   ALL=(ALL) ALL
+```
+to 
+```
+%sudo   ALL=(ALL) NOPASSWD:ALL
+```
+2. The installation script has to be able to ssh back into the installed vm - since this is a baremetal installation, we require the machine to be able to ssh into itself
+  1. generate ssh keys
+  ```
+  cd
+  mkdir .ssh
+  chmod 700 .ssh
+  ssh-keygen -t rsa
+  ```
+  2. authorise your key to ssh into this machine
+  ```
+  cd .ssh
+  touch authorized_keys
+  cat id_rsa.pub >> authorized_keys
+  chmod 600 authorized_keys
+  ```
+  3. install openssh-server
+  ```
+  sudo apt-get install openssh-server
+  ```
+  Note: Make sure you can ssh into the machine with the install user (osboxes) into the 10.0.2.15.
+3. Modify in the /etc/hosts file this line:
+```
+127.0.1.1   osboxes
+```
+to:
+```
 10.0.2.15 osboxes
-
-Note: important - the video shows you add this line to the hosts file, instead you should replace the 127.0.1.1 line with this. Having both 127.0.1.1 and 10.0.2.15 will lead to a failure in the hops_nn recipe.
-
-4. install java
-
-5. install git
-
-6. clone https://github.com/o-alex/karamel-chef and change the install/baremetal users to your user (osboxes) in the cluster definition we will use: 1.hopsworks.yml
-
+```
+4. Install java
+```
+sudo apt-get install jre-default
+```
+5. Install git
+```
+sudo apt-get install git
+```
+6. Get karamel-chef and change the install user in the cluster definition: `1.hopsworks.yml`
+```
+cd
+git clone https://github.com/o-alex/karamel-chef 
+```
+Change the install/baremetal users to your user (osboxes) in the cluster definition:
 https://github.com/o-alex/karamel-chef/blame/master/cluster-defns/1.hopsworks.yml#L3
-
 https://github.com/o-alex/karamel-chef/blame/master/cluster-defns/1.hopsworks.yml#L13
-
-7. download karamel v0.4 (http://karamel.io) from:
-
+7. Get karamel (http://karamel.io) version 0.4:
 http://www.karamel.io/sites/default/files/downloads/karamel-0.4.tgz
-
 8. Run karamel:
-
-karamel-0.4/bin/karamel
-
-9. After running karamel it will automatically load in firefox:
-
-localhost:9090/index.html
-
-10. Within karamel go to "Menu - Load Cluster Defn” and load the 1.hopsworks.yml cluster definition, after which launch the cluster.
-
-karamel-chef/cluster-defn/1.hopsworks.yml
-
-Note: remember to change the install/baremetal user from vagrant to osboxes in our case.
-
-11. Launch and check the status until all recipies are installed.
-
-12. Access hops on the 8080 port
+```
+cd karamel-0.4
+./bin/karamel
+```
+9. After running karamel it will automatically load in firefox under `localhost:9090/index.html`
+10. Within karamel go to `Menu` - `Load Cluster Defn` and load the `1.hopsworks.yml` cluster definition, after which `Launch` the cluster.
+Note: remember to change the install/baremetal user from vagrant to osboxes in this case.
+11. Launch and check the status until all recipies are installed (status - done).
+11. Launch and check the status until all recipies are installed (status - done).
+12. Access hops at the `localhost:8080/hopsworks`

@@ -106,12 +106,14 @@ sudo apt-get install git
 ```
 6. Get karamel-chef and change the install user in the cluster definition: `1.hopsworks.yml`
 ```
-cd
 git clone https://github.com/o-alex/karamel-chef 
 ```
 Change the install/baremetal users to your user (osboxes) in the cluster definition:
+
 https://github.com/o-alex/karamel-chef/blame/master/cluster-defns/1.hopsworks.yml#L3
+
 https://github.com/o-alex/karamel-chef/blame/master/cluster-defns/1.hopsworks.yml#L13
+
 7. Get karamel (http://karamel.io) version 0.4:
 http://www.karamel.io/sites/default/files/downloads/karamel-0.4.tgz
 8. Run karamel:

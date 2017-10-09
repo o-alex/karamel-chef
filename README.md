@@ -68,25 +68,25 @@ to
 %sudo   ALL=(ALL) NOPASSWD:ALL
 ```
 2. The installation script has to be able to ssh back into the installed vm - since this is a baremetal installation, we require the machine to be able to ssh into itself
-  1. generate ssh keys
-  ```
-  cd
-  mkdir .ssh
-  chmod 700 .ssh
-  ssh-keygen -t rsa
-  ```
-  2. authorise your key to ssh into this machine
-  ```
-  cd .ssh
-  touch authorized_keys
-  cat id_rsa.pub >> authorized_keys
-  chmod 600 authorized_keys
-  ```
-  3. install openssh-server
-  ```
-  sudo apt-get install openssh-server
-  ```
-  Note: Make sure you can ssh into the machine with the install user (osboxes) into the 10.0.2.15.
+2.1. generate ssh keys
+```
+cd
+mkdir .ssh
+chmod 700 .ssh
+ssh-keygen -t rsa
+```
+2.2. authorise your key to ssh into this machine
+```
+cd .ssh
+touch authorized_keys
+cat id_rsa.pub >> authorized_keys
+chmod 600 authorized_keys
+```
+2.3. install openssh-server
+```
+sudo apt-get install openssh-server
+```
+Note: Make sure you can ssh into the machine with the install user (osboxes) into the 10.0.2.15.
 3. Modify in the /etc/hosts file this line:
 ```
 127.0.1.1   osboxes
